@@ -33,20 +33,28 @@ public partial class MyDiagram
 
         var firstNode = Diagram.Nodes.Add(new NodeModel(position: new Point(50, 50))
         {
-            Title = "Node 1"
+            Title = "Node 1",
         });
         var secondNode = Diagram.Nodes.Add(new NodeModel(position: new Point(200, 100))
         {
             Title = "Node 2"
         });
-        var leftPort = secondNode.AddPort(PortAlignment.Left);
-        var rightPort = secondNode.AddPort(PortAlignment.Right);
+        var thirdNode = Diagram.Nodes.Add(new NodeModel(position: new Point(400, 150))
+        {
+            Title = "Node 3"
+        });
+        var rightPortNode1 = firstNode.AddPort(PortAlignment.Right);
+        var leftPortNode2 = secondNode.AddPort(PortAlignment.Left);
+        var rightPortNode2 = secondNode.AddPort(PortAlignment.Right);
+        var leftPortNode3 = thirdNode.AddPort(PortAlignment.Left);
 
-        // The connection point will be the intersection of
-        // a line going from the target to the center of the source
-        var sourceAnchor = new ShapeIntersectionAnchor(firstNode);
-        // The connection point will be the port's position
-        var targetAnchor = new SinglePortAnchor(leftPort);
-        var link = Diagram.Links.Add(new LinkModel(sourceAnchor, targetAnchor));
+        // // The connection point will be the intersection of
+        // // a line going from the target to the center of the source
+
+        // // var sourceAnchor = new SinglePortAnchor(rightPort);
+        // // The connection point will be the port's position
+
+        var link1 = Diagram.Links.Add(new LinkModel(new ShapeIntersectionAnchor(firstNode), new SinglePortAnchor(leftPortNode2)));
+        var link2 = Diagram.Links.Add(new LinkModel(new SinglePortAnchor(rightPortNode2), new SinglePortAnchor(leftPortNode3)));
     }
 }
